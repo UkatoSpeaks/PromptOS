@@ -133,16 +133,16 @@ export default function WorkflowsPage() {
             {/* 1. List Header */}
             <section className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pt-4">
               <div className="space-y-4">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mb-3">
                     <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-inner">
                        <Workflow size={18} />
                     </div>
                     <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">Execution Hub</span>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-gradient leading-tight">
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gradient leading-tight mb-2">
                   Workflows
                 </h1>
-                <p className="text-zinc-500 text-xl max-w-2xl font-medium">Build multi-step AI processes and structured execution pipelines.</p>
+                <p className="text-zinc-500 text-xl max-w-2xl font-medium leading-relaxed">Systematize your AI engineering with high-fidelity <span className="text-zinc-300">execution pipelines</span>.</p>
               </div>
 
               <Button 
@@ -248,9 +248,9 @@ export default function WorkflowsPage() {
                     <Save size={18} />
                     Save Draft
                  </Button>
-                 <Button className="rounded-xl px-8 h-12 gap-2 shadow-2xl shadow-emerald-500/20 bg-emerald-600 hover:bg-emerald-500">
-                    <Play size={18} fill="currentColor" />
-                    Run Sequence
+                 <Button className="rounded-2xl px-10 h-14 gap-3 shadow-[0_20px_40px_-5px_rgba(16,185,129,0.3)] bg-emerald-600 hover:bg-emerald-500 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold uppercase tracking-widest text-xs">
+                    <Zap size={18} fill="currentColor" className="animate-pulse" />
+                    Deploy Sequence
                  </Button>
               </div>
             </section>
@@ -370,12 +370,22 @@ function WorkflowCard({ workflow, onOpen, index }: { workflow: WorkflowPipeline,
            </div>
         </div>
 
-        <div className="flex items-center justify-between pt-8 border-t border-white/5 mt-8">
-           <div className="flex items-center gap-4 text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
-              <Clock size={14} />
-              Last Run {workflow.updatedAt}
+        <div className="flex items-center justify-between pt-8 border-t border-white/5 mt-8 relative z-10">
+           <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2.5 text-zinc-600 text-[10px] font-bold uppercase tracking-widest bg-white/[0.02] px-3 py-1.5 rounded-lg border border-white/5">
+                 <Clock size={14} className="text-zinc-700" />
+                 {workflow.updatedAt}
+              </div>
+              <div className="flex gap-1">
+                 {workflow.steps.map((_, i) => (
+                   <div key={i} className={cn(
+                     "w-1.5 h-1.5 rounded-full transition-all duration-500",
+                     i < 2 ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "bg-zinc-800"
+                   )} />
+                 ))}
+              </div>
            </div>
-           <Button variant="ghost" className="p-0 text-zinc-800 group-hover:text-emerald-500 transition-colors">
+           <Button variant="ghost" className="p-0 text-zinc-800 group-hover:text-emerald-500 transition-all group-hover:translate-x-1">
               <ArrowRight size={24} />
            </Button>
         </div>
@@ -400,17 +410,22 @@ function StepCard({ step, index, isLast }: { step: WorkflowStep, index: number, 
       {/* Number/Step Indicator */}
       <div className="relative flex flex-col items-center">
          <div className={cn(
-           "w-20 h-20 rounded-[28px] border-2 flex items-center justify-center text-xl font-bold transition-all duration-500 shadow-2xl relative z-10",
+           "w-20 h-20 rounded-[30px] border-2 flex items-center justify-center text-2xl font-black transition-all duration-700 shadow-2xl relative z-20",
            step.status === "completed" 
-            ? "bg-emerald-600 border-emerald-500 text-white" 
-            : "bg-zinc-950 border-white/5 text-zinc-700"
+            ? "bg-emerald-600 border-emerald-400 text-white shadow-[0_0_30px_rgba(16,185,129,0.3)]" 
+            : "bg-[#09090b] border-white/10 text-zinc-700"
          )}>
-            {step.status === "completed" ? <Check size={32} /> : index + 1}
+            {step.status === "completed" ? (
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 12 }}>
+                <Check size={32} strokeWidth={3} />
+              </motion.div>
+            ) : index + 1}
             
-            {/* Pulsing Aura if idle */}
-            {step.status === "idle" && (
-              <div className="absolute inset-0 bg-white/5 rounded-[28px] animate-pulse -z-10" />
-            )}
+            {/* Glow Aura */}
+            <div className={cn(
+              "absolute inset-0 rounded-[30px] -z-10 transition-all duration-500 blur-xl",
+              step.status === "completed" ? "bg-emerald-500/20" : "bg-white/[0.02]"
+            )} />
          </div>
       </div>
 
@@ -474,10 +489,10 @@ function StepCard({ step, index, isLast }: { step: WorkflowStep, index: number, 
                        </div>
                     </div>
 
-                    <div className="flex items-center gap-4 pt-4">
-                       <Button className="flex-1 rounded-2xl h-14 font-extrabold uppercase tracking-widest text-xs gap-3 shadow-xl shadow-emerald-500/10 bg-emerald-600 hover:bg-emerald-500">
+                    <div className="flex items-center gap-4 pt-4 relative z-20">
+                       <Button className="flex-1 rounded-[22px] h-14 font-extrabold uppercase tracking-[0.2em] text-[10px] gap-3 shadow-xl shadow-emerald-500/10 bg-emerald-600 hover:bg-emerald-500 hover:scale-[1.01] transition-all">
                           <Play size={16} fill="currentColor" />
-                          Execute Blueprint
+                          Initialize Step
                        </Button>
                        <Button variant="outline" className="h-14 px-6 rounded-2xl border-white/5 text-zinc-500">
                           <Trash2 size={20} />
@@ -520,19 +535,21 @@ function StepCard({ step, index, isLast }: { step: WorkflowStep, index: number, 
 
 function OnboardingStep({ number, title, description, icon }: { number: string; title: string; description: string; icon: React.ReactNode }) {
   return (
-    <div className="p-8 rounded-[32px] bg-white/[0.02] border border-white/5 relative overflow-hidden group">
-      <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-        <div className="text-6xl font-black italic tracking-tighter text-zinc-500">{number}</div>
+    <div className="p-10 rounded-[40px] bg-white/[0.01] border border-white/5 relative overflow-hidden group hover:bg-white/[0.02] transition-all duration-500">
+      <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 transform group-hover:rotate-6 group-hover:scale-110">
+        <div className="text-8xl font-black italic tracking-tighter text-white">{number}</div>
       </div>
-      <div className="relative z-10 space-y-4">
-        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm transition-transform group-hover:scale-110">
+      <div className="relative z-10 space-y-6">
+        <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] transition-transform group-hover:scale-110 duration-500">
           {icon}
         </div>
         <div>
-          <h4 className="font-bold text-lg mb-1 group-hover:text-emerald-500 transition-colors">{title}</h4>
-          <p className="text-zinc-500 text-sm leading-relaxed font-internal">{description}</p>
+          <h4 className="font-bold text-xl mb-2 group-hover:text-emerald-500 transition-colors tracking-tight">{title}</h4>
+          <p className="text-zinc-500 text-sm leading-relaxed font-medium group-hover:text-zinc-400 transition-colors">{description}</p>
         </div>
       </div>
+      {/* Selection Glow */}
+      <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-emerald-500/10 blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
     </div>
   );
 }
