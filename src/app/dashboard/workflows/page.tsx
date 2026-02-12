@@ -154,7 +154,29 @@ export default function WorkflowsPage() {
               </Button>
             </section>
 
-            {/* 2. Search & Controls */}
+            {/* 2. Onboarding Section */}
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+               <OnboardingStep 
+                 number="01"
+                 title="Define Mission"
+                 description="Create a new workflow and set the high-level objective for your AI pipeline."
+                 icon={<Target size={20} />}
+               />
+               <OnboardingStep 
+                 number="02"
+                 title="Stack Instructions"
+                 description="Add sequential steps by pulling from your Library or writing custom neural commands."
+                 icon={<Layers size={20} />}
+               />
+               <OnboardingStep 
+                 number="03"
+                 title="Deploy Sequence"
+                 description="Execute the orchestrated chain and watch the AI synthesize data step-by-step."
+                 icon={<Zap size={20} />}
+               />
+            </section>
+
+            {/* 3. Search & Controls */}
             <section className="p-3 glass-card rounded-[32px] flex items-center gap-3 bg-white/[0.01]">
                <div className="flex-1 relative p-1">
                   <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-600 font-bold" />
@@ -493,5 +515,24 @@ function StepCard({ step, index, isLast }: { step: WorkflowStep, index: number, 
          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.01] pointer-events-none" />
       </Card>
     </motion.div>
+  );
+}
+
+function OnboardingStep({ number, title, description, icon }: { number: string; title: string; description: string; icon: React.ReactNode }) {
+  return (
+    <div className="p-8 rounded-[32px] bg-white/[0.02] border border-white/5 relative overflow-hidden group">
+      <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+        <div className="text-6xl font-black italic tracking-tighter text-zinc-500">{number}</div>
+      </div>
+      <div className="relative z-10 space-y-4">
+        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-sm transition-transform group-hover:scale-110">
+          {icon}
+        </div>
+        <div>
+          <h4 className="font-bold text-lg mb-1 group-hover:text-emerald-500 transition-colors">{title}</h4>
+          <p className="text-zinc-500 text-sm leading-relaxed font-internal">{description}</p>
+        </div>
+      </div>
+    </div>
   );
 }
