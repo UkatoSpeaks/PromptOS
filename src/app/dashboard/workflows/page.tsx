@@ -29,7 +29,9 @@ import {
   Cpu,
   Database,
   Shield,
-  Search,
+  Search, 
+  Filter,
+  Grid,
   X,
   MoreVertical,
   Maximize2
