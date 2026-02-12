@@ -91,24 +91,26 @@ export default function DashboardPage() {
 
         <motion.div 
           variants={item} 
-          className="flex flex-wrap items-center gap-3"
+          className="flex items-center gap-6"
         >
-          <div className="flex -space-x-3 items-center mr-4">
-             {[1,2,3,4].map(i => (
-               <div key={i} className="w-10 h-10 rounded-full border-4 border-[#020202] bg-zinc-800 ring-1 ring-white/5" />
+          <div className="flex -space-x-3 items-center">
+             {[1,2,3].map(i => (
+               <div key={i} className="w-10 h-10 rounded-full border-[3px] border-[#020203] bg-zinc-800 ring-1 ring-white/5 shadow-2xl" />
              ))}
-             <div className="w-10 h-10 rounded-full border-4 border-[#020202] bg-primary/20 ring-1 ring-white/5 flex items-center justify-center text-[10px] font-bold text-primary">
-                +12
+             <div className="w-10 h-10 rounded-full border-[3px] border-[#020203] bg-primary/20 ring-1 ring-white/5 flex items-center justify-center text-[10px] font-bold text-primary shadow-2xl relative z-10">
+                GT
              </div>
           </div>
-          <Button variant="outline" className="rounded-xl border-white/5 bg-white/5 hover:bg-white/10 gap-2">
-            <Plus size={16} />
-            Invite Team
-          </Button>
-          <Button className="rounded-xl gap-2 shadow-xl shadow-primary/20 px-6">
-            <Zap size={16} fill="currentColor" />
-            Go Pro
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" className="rounded-xl border-white/5 bg-white/5 hover:bg-white/10 gap-2">
+              <Plus size={16} />
+              Invite
+            </Button>
+            <Button className="rounded-xl gap-2 shadow-xl shadow-primary/20 px-6">
+              <Zap size={16} fill="currentColor" />
+              Go Pro
+            </Button>
+          </div>
         </motion.div>
       </section>
 

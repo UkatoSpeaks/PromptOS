@@ -162,15 +162,19 @@ ${formData.context}
              </div>
              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500">Neural Orchestrator</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gradient">Prompt Builder</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+             <span className="text-gradient inline-block">Prompt Builder</span>
+          </h1>
           <p className="text-zinc-400 text-lg max-w-xl font-medium">Design structured, project-grounded prompts for professional-grade AI outputs.</p>
         </div>
         
-        <div className="flex items-center gap-4">
-           <div className="flex -space-x-2 items-center mr-4">
-              <div className="w-8 h-8 rounded-full border-2 border-[#020202] bg-zinc-800" />
-              <div className="w-8 h-8 rounded-full border-2 border-[#020202] bg-zinc-700" />
-              <div className="w-8 h-8 rounded-full border-2 border-[#020202] bg-primary/20 flex items-center justify-center text-[10px] text-primary font-bold">GT</div>
+        <div className="flex items-center gap-6">
+           <div className="flex -space-x-2 items-center">
+              <div className="w-8 h-8 rounded-full border-2 border-[#020203] bg-zinc-800 shadow-xl" />
+              <div className="w-8 h-8 rounded-full border-2 border-[#020203] bg-zinc-700 shadow-xl" />
+              <div className="w-8 h-8 rounded-full border-2 border-[#020203] bg-primary/20 flex items-center justify-center text-[10px] text-primary font-bold shadow-xl relative z-10">
+                GT
+              </div>
            </div>
            <Button 
             variant="outline" 
