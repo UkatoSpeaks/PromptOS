@@ -14,7 +14,8 @@ import {
   PlusCircle,
   Search,
   MessageSquare,
-  Workflow
+  Workflow,
+  Users
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -35,6 +36,7 @@ export default function DashboardLayout({
     { name: "Builder", href: "/dashboard/builder", icon: Command },
     { name: "Library", href: "/dashboard/library", icon: Library },
     { name: "Workflows", href: "/dashboard/workflows", icon: Workflow },
+    { name: "Teams", href: "/dashboard/teams", icon: Users },
     { name: "Context", href: "/dashboard/context", icon: Sparkles },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
