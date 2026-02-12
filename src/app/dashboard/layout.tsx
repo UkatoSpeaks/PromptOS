@@ -35,8 +35,8 @@ export default function DashboardLayout({
     { name: "Builder", href: "/dashboard/builder", icon: Command },
     { name: "Library", href: "/dashboard/library", icon: Library },
     { name: "Workflows", href: "/dashboard/workflows", icon: Workflow },
-    { name: "Context", href: "/dashboard/settings", icon: Sparkles },
-    { name: "Settings", href: "/dashboard/settings/account", icon: Settings },
+    { name: "Context", href: "/dashboard/context", icon: Sparkles },
+    { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
 
   return (
