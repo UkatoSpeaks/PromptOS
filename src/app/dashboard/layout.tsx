@@ -71,10 +71,12 @@ export default function DashboardLayout({
         {/* New Prompt Button */}
         {!collapsed && (
           <div className="px-4 mb-6">
-            <Button className="w-full gap-2 bg-white text-black hover:bg-white/90">
-              <PlusCircle size={18} />
-              New Prompt
-            </Button>
+            <Link href="/dashboard/builder" className="block">
+              <Button className="w-full gap-2 bg-white text-black hover:bg-white/90">
+                <PlusCircle size={18} />
+                New Prompt
+              </Button>
+            </Link>
           </div>
         )}
 
