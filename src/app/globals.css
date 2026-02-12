@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: #020203;
+  --color-foreground: #ffffff;
+  
+  --color-primary: #8b5cf6; /* Violet 500 */
+  --color-secondary: #3b82f6; /* Blue 500 */
+  
+  --color-card: #09090b;
+  --color-border: rgba(255, 255, 255, 0.08);
+  
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/30;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .glass-nav {
+    @apply sticky top-4 z-50 bg-[#09090b]/40 backdrop-blur-md border border-white/[0.05] rounded-2xl mx-auto max-w-7xl px-4 transition-all duration-300;
+  }
+  
+  .glass-nav-scrolled {
+    @apply top-2 border-white/[0.08] bg-[#09090b]/80 shadow-2xl;
+  }
+
+  .noise {
+    position: relative;
+  }
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .hero-glow {
+    background: radial-gradient(circle at 50% -20%, rgba(139, 92, 246, 0.2), transparent 70%);
+  }
+
+  .glow-blue {
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent 70%);
+  }
+  
+  .glow-purple {
+    background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1), transparent 70%);
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(to right, #8b5cf6, #3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 40px -10px rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.4);
 }
